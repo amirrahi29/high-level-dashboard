@@ -7,38 +7,15 @@
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "test": "vitest run"
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^14.6.1",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-router-dom": "^7.15.1",
-    "recharts": "^3.8.1",
-    "web-vitals": "^4.2.4"
+    "recharts": "^3.8.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.7.0",
-    "jsdom": "^26.1.0",
-    "playwright": "^1.60.0",
-    "vite": "^6.4.1",
-    "vitest": "^3.2.4"
-  },
-  "browserslist": {
-    "production": [
-      "chrome >= 120",
-      "firefox >= 121",
-      "safari >= 17",
-      "edge >= 120"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "vite": "^6.4.1"
   }
 }

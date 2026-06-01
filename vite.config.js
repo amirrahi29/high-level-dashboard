@@ -1,7 +1,7 @@
 import { defineConfig, transformWithEsbuild } from 'vite';
 import react from '@vitejs/plugin-react';
 
-/** Allow JSX in .js files (legacy CRA layout) without renaming every module. */
+/** Allow JSX in .js files without renaming every module. */
 function jsxInJs() {
   return {
     name: 'jsx-in-js',
@@ -18,6 +18,13 @@ function jsxInJs() {
 
 export default defineConfig({
   plugins: [jsxInJs(), react()],
+  optimizeDeps: {
+    esbuildOptions: {
+      loader: {
+        '.js': 'jsx',
+      },
+    },
+  },
   server: {
     port: 3000,
     strictPort: false,
@@ -26,10 +33,5 @@ export default defineConfig({
     outDir: 'build',
     sourcemap: true,
     target: 'es2022',
-  },
-  test: {
-    environment: 'jsdom',
-    setupFiles: './src/setupTests.js',
-    css: true,
   },
 });

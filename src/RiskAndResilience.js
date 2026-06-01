@@ -11,11 +11,7 @@ import {
   Tooltip,
 } from 'recharts';
 
-/* ═══════════════════════════════════════════════════════════
-   XYZ_DASHBOARD_JSON — all dashboard data (edit JSON below only)
-   UI/components live below this block in the same file.
-═══════════════════════════════════════════════════════════ */
-const XYZ_DASHBOARD_JSON = `{
+const RISK_AND_RESILIENCE_DASHBOARD_JSON = `{
   "header": {
     "title": "Product Resiliency: ADP Wide Metrics FYTD March 2026",
     "subtitle": "Enterprise Operations Dashboard · Real-time Resiliency Intelligence"
@@ -374,7 +370,7 @@ const XYZ_DASHBOARD_JSON = `{
   }
 }`;
 
-const DASHBOARD_DATA = JSON.parse(XYZ_DASHBOARD_JSON);
+const DASHBOARD_DATA = JSON.parse(RISK_AND_RESILIENCE_DASHBOARD_JSON);
 
 const CHART_KEYS = ['mttd', 'mtte', 'mttr'];
 const CHART_DELAYS = { mttd: 450, mtte: 520, mttr: 590 };
@@ -1925,12 +1921,12 @@ function DashboardContent({ data }) {
   );
 }
 
-const XYZ = () => (
+const RiskAndResilience = () => (
   <>
     <style>{DASHBOARD_STYLES}</style>
     <DashboardContent data={DASHBOARD_DATA} />
   </>
 );
 
-export default XYZ;
-export { XYZ_DASHBOARD_JSON, DASHBOARD_DATA };
+export default RiskAndResilience;
+export { RISK_AND_RESILIENCE_DASHBOARD_JSON, DASHBOARD_DATA };

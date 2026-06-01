@@ -1,15 +1,7 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import XYZ from './XYZ';
-import GHI from './GHI';
-
-/**
- * DEF.js — Command Center Cockpit (main app).
- * Embedded initiative dashboards live in separate self-contained files:
- *   - XYZ.js → Risk and Resiliency
- *   - GHI.js → Cloud Migration
- * Import and wire new embedded views here via EMBEDDED_INITIATIVE_VIEWS.
- */
+import RiskAndResilience from './RiskAndResilience';
+import CloudMigration from './CloudMigration';
 import {
   Area,
   AreaChart,
@@ -31,8 +23,8 @@ const PRODUCT_RESILIENCY_INITIATIVE_ID = 'risk-and-resiliency';
 const CLOUD_MIGRATION_INITIATIVE_ID = 'cloud-migration';
 
 const EMBEDDED_INITIATIVE_VIEWS = {
-  [PRODUCT_RESILIENCY_INITIATIVE_ID]: XYZ,
-  [CLOUD_MIGRATION_INITIATIVE_ID]: GHI,
+  [PRODUCT_RESILIENCY_INITIATIVE_ID]: RiskAndResilience,
+  [CLOUD_MIGRATION_INITIATIVE_ID]: CloudMigration,
 };
 
 function getEmbeddedInitiativeView(initiativeId) {
@@ -121,7 +113,6 @@ function toSlug(text) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 56);
 }
 
-/** Per-initiative progress (26 rows) - mixed bands; portfolio average ~81 (green overall health). */
 const DEMO_INITIATIVE_PROGRESS = [
   95, 92, 58, 30, 96, 65, 94, 91, 35, 88, 72, 97, 90, 93, 76, 89,
   96, 87, 98, 40, 92, 85, 78, 94, 86, 91,
@@ -322,7 +313,6 @@ function formatFastPillarSubtitle(fullName) {
     .trim();
 }
 
-/** Initiative tracker KPI overrides - progress/trend/risk derived from live project data. */
 const INITIATIVE_TRACKER_REF = {
   'deliver against medium term guidance': {
     initiative: 'Deliver on BU & Functional Priorities & KTLO',
@@ -440,7 +430,6 @@ const SCORECARD_STATUS_META = {
   'off-track': { label: 'Off Track', tone: 'risk' },
 };
 
-/** Executive initiative scorecard KPI rows (reference screenshots). */
 const INITIATIVE_SCORECARD_REF = {
   'deliver against medium term guidance': {
     strategicTargets: [
@@ -1591,10 +1580,6 @@ const ORG_DATA = {
   fastCategories: FAST_CATEGORIES,
 };
 
-/* ─────────────────────────────────────────────────────────────
-   HELPERS
-───────────────────────────────────────────────────────────── */
-
 const STATUS_META = {
   'on-track': { label: 'On Track', color: '#059669', bg: '#ecfdf5' },
   delayed: { label: 'Delayed', color: '#d97706', bg: '#fffbeb' },
@@ -1637,10 +1622,6 @@ function getInitials(name) {
 }
 
 const CRITICAL_STATUS = new Set(['at-risk', 'delayed', 'blocked', 'off-track']);
-
-/* ─────────────────────────────────────────────────────────────
-   UI PRIMITIVES
-───────────────────────────────────────────────────────────── */
 
 function StatusPill({ status }) {
   const meta = STATUS_META[status] || { label: status, color: '#64748b', bg: '#f1f5f9' };
@@ -2942,10 +2923,6 @@ function CockpitQuarterHighlights({ lastQuarter, highlights }) {
   );
 }
 
-/* ─────────────────────────────────────────────────────────────
-   LAYER VIEWS
-───────────────────────────────────────────────────────────── */
-
 function CeoView({ theme, onOpenFastPillar, onOpenInitiative }) {
   const vp = useViewport();
   const analytics = useMemo(
@@ -3788,10 +3765,6 @@ function TeamView({
   );
 }
 
-/* ─────────────────────────────────────────────────────────────
-   STYLES
-───────────────────────────────────────────────────────────── */
-
 const STYLES = `
   html { scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -4181,7 +4154,6 @@ const STYLES = `
   }
   .def-layout {
     position: relative;
-    /* No z-index - mobile drawer must stack above backdrop (z-index 150). */
   }
 
   .def-topbar {
@@ -5500,7 +5472,6 @@ const STYLES = `
     border-color: rgba(99,102,241,0.3);
   }
 
-  /* Initiative detail page */
   .def-main:has(.def-initiative-embed) {
     padding: 0;
   }
@@ -5566,7 +5537,6 @@ const STYLES = `
     display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0;
   }
 
-  /* FAST pillar page — single workspace surface */
   .def-pillar-page {
     gap: var(--space-2);
   }
@@ -5795,7 +5765,6 @@ const STYLES = `
   }
   .def-btn-ghost:hover { background: rgba(99,102,241,0.06); border-color: rgba(99,102,241,0.25); }
 
-  /* Executive scorecard tables (Focus / Accelerate / Scale / Transform) */
   .def-scorecard-targets { margin-bottom: var(--space-3); }
   .def-scorecard-targets-label {
     margin: 0 0 8px; font-size: 0.68rem; font-weight: 800; text-transform: uppercase;
@@ -7228,7 +7197,6 @@ const STYLES = `
     max-height: none;
   }
 
-  /* Modal pro tables — unified popup table design */
   .def-modal-pro-table-wrap {
     margin: 0 12px 12px;
     border: 1px solid rgba(226,232,240,0.95);
@@ -8312,7 +8280,6 @@ const STYLES = `
     50% { transform: translateY(-2px) scale(1.1) rotate(-4deg); }
   }
 
-  /* Command Center Cockpit */
   .def-cockpit {
     --cockpit-ease: cubic-bezier(0.22, 1, 0.36, 1);
     --cockpit-ease-spring: cubic-bezier(0.34, 1.45, 0.64, 1);
@@ -9596,7 +9563,6 @@ const STYLES = `
   .def-tracker-owner,
   .def-tracker-team { min-width: 108px; }
 
-  /* Initiative tracker (Command Center reference) */
   .def-cockpit-tracker { padding: var(--space-3) var(--space-3) var(--space-2); }
   .def-tracker-legend {
     display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center;
@@ -11025,7 +10991,6 @@ const STYLES = `
     .def-cockpit-fast-health h3 { line-clamp: 3; }
   }
 
-  /* Dark theme - layer surfaces */
   .def-app.def-theme-dark .def-alert-line,
   .def-app.def-theme-dark .def-delay-reason {
     background: rgba(234,88,12,0.12);
@@ -11161,7 +11126,6 @@ const STYLES = `
   .def-cockpit-theme-dark .def-tracker-imperative { background: rgba(15,23,42,0.65) !important; }
   .def-cockpit-theme-dark .def-tracker-row-click:hover td { background: rgba(99,102,241,0.14) !important; }
 
-  /* Responsive polish - tracker, detail tables, drawer, touch targets */
   @media (max-width: 768px) {
     .def-panel:hover { transform: none; box-shadow: var(--def-shadow); }
     .def-initiative-header { padding: var(--space-3); }
@@ -11220,11 +11184,7 @@ const STYLES = `
   }
 `;
 
-/* ─────────────────────────────────────────────────────────────
-   ROOT APP - layer navigation
-───────────────────────────────────────────────────────────── */
-
-const DEF = () => {
+const Dashboard = () => {
   const [layer, setLayer] = useState('ceo');
   const [fastId, setFastId] = useState(null);
   const [initiativeId, setInitiativeId] = useState(null);
@@ -11247,7 +11207,6 @@ const DEF = () => {
     try {
       localStorage.setItem(THEME_STORAGE_KEY, theme);
     } catch {
-      /* ignore */
     }
   }, [theme]);
 
@@ -11459,6 +11418,6 @@ const DEF = () => {
 };
 
 export { useResponsiveChart };
-export { default as GHI } from './GHI';
-export { default as XYZ } from './XYZ';
-export default DEF;
+export { default as CloudMigration } from './CloudMigration';
+export { default as RiskAndResilience } from './RiskAndResilience';
+export default Dashboard;

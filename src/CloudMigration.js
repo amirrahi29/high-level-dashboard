@@ -11,11 +11,7 @@ import {
   YAxis,
 } from 'recharts';
 
-/* ═══════════════════════════════════════════════════════════
-   GHI_DASHBOARD_JSON — all dashboard data (edit JSON below only)
-   UI/components live below this block in the same file.
-═══════════════════════════════════════════════════════════ */
-const GHI_DASHBOARD_JSON = `{
+const CLOUD_MIGRATION_DASHBOARD_JSON = `{
   "header": {
     "breadcrumbs": [
       "Dashboard",
@@ -334,7 +330,7 @@ const GHI_DASHBOARD_JSON = `{
   }
 }`;
 
-const DASHBOARD_DATA = JSON.parse(GHI_DASHBOARD_JSON);
+const DASHBOARD_DATA = JSON.parse(CLOUD_MIGRATION_DASHBOARD_JSON);
 
 const STATUS_KEYS = DASHBOARD_DATA.businessUnitStackOrder;
 
@@ -1422,12 +1418,12 @@ const DASHBOARD_STYLES = `
   }
 `;
 
-const GHI = () => (
+const CloudMigration = () => (
   <>
     <style>{DASHBOARD_STYLES}</style>
     <DashboardContent data={DASHBOARD_DATA} />
   </>
 );
 
-export default GHI;
-export { GHI_DASHBOARD_JSON, DASHBOARD_DATA };
+export default CloudMigration;
+export { CLOUD_MIGRATION_DASHBOARD_JSON, DASHBOARD_DATA };
