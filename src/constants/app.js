@@ -1,0 +1,13 @@
+const APP_LOCALE = 'en-US';
+const EMPTY_VALUE = 'N/A';
+const PRODUCT_RESILIENCY_INITIATIVE_ID = 'risk-and-resiliency';
+const CLOUD_MIGRATION_INITIATIVE_ID = 'cloud-migration';
+const THEME_STORAGE_KEY = 'adp-demo-theme';
+
+export {
+  APP_LOCALE,
+  EMPTY_VALUE,
+  PRODUCT_RESILIENCY_INITIATIVE_ID,
+  CLOUD_MIGRATION_INITIATIVE_ID,
+  THEME_STORAGE_KEY,
+};
